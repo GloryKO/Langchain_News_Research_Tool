@@ -2,7 +2,9 @@ import os
 import streamlit as st
 import pickle
 import time
-from langchain import OpenAI
+from langchain.llms import OpenAI
+from langchain.llms.openai import OpenAIChat
+from langchain.chat_models import ChatOpenAI
 from langchain.chains import RetrievalQAWithSourcesChain
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.document_loaders import UnstructuredURLLoader
@@ -10,7 +12,7 @@ from langchain.embeddings import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
 
 from dotenv import load_dotenv
-load_dotenv()  # take environment variables from .env
+load_dotenv()  # take environment variables from .envclea
 
 st.title("RockyBot: News Research Tool 📈")
 st.sidebar.title("News Article URLs")
@@ -24,7 +26,7 @@ process_url_clicked = st.sidebar.button("Process URLs")
 file_path = "faiss_store_openai.pkl"
 
 main_placeholder = st.empty()
-llm = OpenAI(temperature=0.9, max_tokens=500)
+llm = ChatOpenAI(model_name="gpt-3.5-turbo",temperature=0.9, max_tokens=500)
 
 if process_url_clicked:
     # load data
